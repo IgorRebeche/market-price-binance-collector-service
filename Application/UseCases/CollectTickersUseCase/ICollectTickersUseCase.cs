@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services.BinanceService.Responses
+namespace Application.UseCases.CollectTickersUseCase
 {
-    public class CriptoPriceResponse
+    public interface ICollectTickersUseCase
     {
-        decimal price;
+        public void RunAsync();
     }
 }

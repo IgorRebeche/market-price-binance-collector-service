@@ -1,11 +1,19 @@
 
+
 using Application.Extensions;
+using Application.Services.BinanceService;
+using Application.UseCases.CollectTickersUseCase;
+using Infrastructure;
+using Infrastructure.Services.BinanceService;
+using Infrastructure.Tasks;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddApplicationExtensions(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddHostedService<ProcessTickerTask>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

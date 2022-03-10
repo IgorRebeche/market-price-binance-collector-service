@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace Application.Services.BinanceService
 {
-    internal interface IBinanceService
+    public interface IBinanceService
     {
         public Task OnConnected(Func<CriptoPriceResponse, int> onConnected);
+
+        public Task GetBookTickerStreams(List<string> pairs, Action<string> handleMessage);
+
+        public void Disconnect();
     }
 }

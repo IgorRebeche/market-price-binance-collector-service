@@ -8,15 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="extensions\**" />
+    <Content Remove="extensions\**" />
+    <EmbeddedResource Remove="extensions\**" />
+    <None Remove="extensions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="extensions\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
