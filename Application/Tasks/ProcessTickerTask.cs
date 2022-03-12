@@ -26,7 +26,8 @@ namespace Application.Tasks
             _logger.LogInformation("Start Job");
             List<string> pairs = new List<string>();
             pairs.Add("btcusdt");
-            //pairs.Add("ethusdt");
+            pairs.Add("ethusdt");
+            pairs.Add("bnbusdt");
             Task.Run(async () =>
             {
                 await _binanceService.GetBookTickerStreams(pairs, async msg =>
