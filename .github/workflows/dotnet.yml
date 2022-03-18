@@ -27,7 +27,7 @@ jobs:
         source-url: https://nuget.pkg.github.com/igorrebeche/index.json
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    - run: dotnet build Application
+    - run: dotnet build webapi
     - name: Create the package
       run: dotnet pack --configuration Release webapi
     - name: Publish the package to GPR
