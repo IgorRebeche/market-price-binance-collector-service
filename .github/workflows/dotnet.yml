@@ -29,6 +29,6 @@ jobs:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - run: dotnet build webapi
     - name: Create the package
-      run: dotnet pack --configuration Release webapi
+      run: dotnet pack --configuration Release events
     - name: Publish the package to GPR
       run: dotnet nuget push market-price-binance-collector-service/bin/Release/*.nupkg
