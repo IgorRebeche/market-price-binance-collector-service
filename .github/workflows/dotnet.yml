@@ -13,6 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
@@ -22,8 +23,10 @@ jobs:
     # Authenticates packages to push to GPR
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    - run: dotnet build
+    - run: dotnet build ./src/events
+    
     - name: Create the package
       run: dotnet pack --configuration Release events
+    
     - name: Publish the package to GPR
       run: dotnet nuget push market-price-binance-collector-service/bin/Release/*.nupkg
