@@ -24,9 +24,14 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       
-      
+    - name: Install dependencies
+      run: dotnet restore
+    
     - name: Build
       run: dotnet build --configuration Release --no-restore
+      
+    - name: Test with the dotnet CLI
+      run: dotnet test
     
     - name: Create the package 
       run: dotnet pack --configuration Release events
