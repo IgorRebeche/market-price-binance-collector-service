@@ -38,4 +38,4 @@ jobs:
       run: dotnet pack --configuration Release ${{ env.app_path }}
     
     - name: Publish the package to GPR
-      run: dotnet nuget push ${{ github.event.repository.name }}/bin/Release/*.nupkg
+      run: dotnet nuget push ./Events/bin/Release/*.nupkg
