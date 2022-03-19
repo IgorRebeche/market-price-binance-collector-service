@@ -23,9 +23,12 @@ jobs:
     # Authenticates packages to push to GPR
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    - run: dotnet build
+      
+      
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
     
-    - name: Create the package
+    - name: Create the package 
       run: dotnet pack --configuration Release events
     
     - name: Publish the package to GPR
