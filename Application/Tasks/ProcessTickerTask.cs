@@ -14,6 +14,7 @@ namespace Application.Tasks
         private readonly ICollectTickersUseCase _collectTickersUseCase;
         private readonly IBinanceService _binanceService;
         private readonly IPublishEndpoint _publishEndpoint;
+        private readonly string BINANCE_BROKER = "Binance";
 
         public ProcessTickerTask(ILogger<ProcessTickerTask> logger, IBinanceService binanceService, IServiceScopeFactory factory)
         {
@@ -30,20 +31,45 @@ namespace Application.Tasks
             pairs.Add("bnbusdt");
             Task.Run(async () =>
             {
-                await _binanceService.GetBookTickerStreams(pairs, async msg =>
-                {
-                    _logger.LogInformation($"Message received from UseCase: {msg}");
-                    await _publishEndpoint.Publish<ITickerCollected>(new
-                    {
-                        Price = msg,
-                        TimeStamp = DateTime.Now
-                    });
-
-                });
+                await GetBookTickerStreams(pairs);
             });
 
 
             return Task.CompletedTask;
+        }
+
+        private async Task GetTickerStreams(List<string> pairs)
+        {
+            await _binanceService.GetTickerStreams(pairs, async msg =>
+            {
+                _logger.LogInformation("Message received from UseCase: {@msg}", msg);
+                await _publishEndpoint.Publish<ITickerCollected>(new
+                {
+                    Symbol = msg.Symbol,
+                    Price = msg.LastPrice,
+                    Volume = msg.BidQuantity,
+                    TimeStamp = msg.EventTime,
+                    BrokerName = BINANCE_BROKER
+                }); ;
+
+            });
+        }
+
+        private async Task GetBookTickerStreams(List<string> pairs)
+        {
+            await _binanceService.GetBookTickerStreams(pairs, async msg =>
+            {
+                _logger.LogInformation("Message received from UseCase: {@msg}", msg);
+                await _publishEndpoint.Publish<ITickerCollected>(new
+                {
+                    Symbol = msg.Symbol,
+                    Price = msg.BidPrice,
+                    Volume = msg.BidQuantity,
+                    TimeStamp = DateTimeOffset.Now.ToUnixTimeMilliseconds(),
+                    BrokerName = BINANCE_BROKER
+                }); ;
+
+            });
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

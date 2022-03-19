@@ -1,9 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	<TargetFramework>net6.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
+	<Version>1.0.1</Version>
+	<Authors>Octocat</Authors>
+	<Company>GitHub</Company>
+	<PackageId>MarketPriceEvents</PackageId>
+	<PackageDescription>This package adds Market Price Events!</PackageDescription>
+	<RepositoryUrl>https://github.com/IgorRebeche/market-price-binance-collector-service</RepositoryUrl>  
   </PropertyGroup>
 
   <ItemGroup>

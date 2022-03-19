@@ -9,9 +9,11 @@ namespace Application.Services.BinanceService
 {
     public interface IBinanceService
     {
-        public Task OnConnected(Func<CriptoPriceResponse, int> onConnected);
+        public Task OnConnected(Func<TickerMessageResponse, int> onConnected);
 
-        public Task GetBookTickerStreams(List<string> pairs, Action<string> handleMessage);
+        public Task GetTickerStreams(List<string> pairs, Action<TickerMessageResponse> handleMessage);
+
+        public Task GetBookTickerStreams(List<string> pairs, Action<BookTickerMessageResponse> handleMessage);
 
         public void Disconnect();
     }

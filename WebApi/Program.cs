@@ -1,6 +1,5 @@
 
 
-using Application.Consumers;
 using Application.Extensions;
 using Application.Tasks;
 using Infrastructure;

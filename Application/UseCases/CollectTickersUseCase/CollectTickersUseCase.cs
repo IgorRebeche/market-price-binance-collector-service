@@ -19,7 +19,7 @@ namespace Application.UseCases.CollectTickersUseCase
             pairs.Add("btcusdt");
             pairs.Add("ethusdt");
 
-            _binanceService.GetBookTickerStreams(pairs, msg => _logger.LogInformation($"Message received from UseCase: {msg}"));
+            _binanceService.GetTickerStreams(pairs, msg => _logger.LogInformation($"Message received from UseCase: {msg}"));
         }
     }
 }
