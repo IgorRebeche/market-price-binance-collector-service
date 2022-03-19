@@ -10,7 +10,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    env:
+        app_path: ./Events/Events.csproj
     steps:
     - uses: actions/checkout@v2
     
@@ -34,7 +35,7 @@ jobs:
       run: dotnet test
     
     - name: Create the package 
-      run: dotnet pack --configuration Release ${{ github.event.repository.name }}/events
+      run: dotnet pack --configuration Release ${{ env.app_path }}
     
     - name: Publish the package to GPR
       run: dotnet nuget push ${{ github.event.repository.name }}/bin/Release/*.nupkg
