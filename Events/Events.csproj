@@ -5,7 +5,7 @@
 	<ImplicitUsings>enable</ImplicitUsings>
 	<Nullable>enable</Nullable>
 	<Version>1.0.1</Version>
-	<Authors>Octocat</Authors>
+	<Authors>Igor Rebeche Rosa</Authors>
 	<Company>GitHub</Company>
 	<PackageId>MarketPriceEvents</PackageId>
 	<PackageDescription>This package adds Market Price Events!</PackageDescription>
