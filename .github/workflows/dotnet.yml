@@ -37,4 +37,4 @@ jobs:
       run: dotnet pack --configuration Release ${{ env.app_path }}
     
     - name: Publish the package to GPR
-      run: dotnet nuget push ./Events/bin/Release/*.nupkg --skip-duplicate
+      run: dotnet nuget push ./Events/bin/Release/*.nupkg -k ${{secrets.GITHUB_TOKEN}} --skip-duplicate
