@@ -1,6 +1,6 @@
 ﻿using Application.Services.BinanceService;
 using Application.UseCases.CollectTickersUseCase;
-using MarketPriceBinanceCollector.Events;
+using Events;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

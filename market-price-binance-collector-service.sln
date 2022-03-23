@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{57138418-0A3D-40AC-835A-472136192FA4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketPriceBinanceCollector.Events", "MarketPriceBinanceCollector.Events\MarketPriceBinanceCollector.Events.csproj", "{9B6E29C0-6D82-40B9-979C-01285492B715}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Events", "Events\Events.csproj", "{9B6E29C0-6D82-40B9-979C-01285492B715}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

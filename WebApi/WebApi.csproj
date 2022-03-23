@@ -4,7 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>market_price_binance_collector_service</RootNamespace>
+	<AssemblyName>Market.Price.Binance.Collector.Service</AssemblyName>
+    <RootNamespace>Market.Price.Binance.Collector.Service</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
