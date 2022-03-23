@@ -11,6 +11,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
+        package_name: MarketPriceBinanceCollector.Events
         app_path: ./MarketPriceBinanceCollector.Events/MarketPriceBinanceCollector.Events.csproj
     steps:
     - uses: actions/checkout@v2
@@ -37,4 +38,4 @@ jobs:
       run: dotnet pack --configuration Release ${{ env.app_path }}
     
     - name: Publish the package to GPR
-      run: dotnet nuget push ./Events/bin/Release/*.nupkg -k ${{secrets.GITHUB_TOKEN}} --skip-duplicate
+      run: dotnet nuget push ./${{ env.package_name }}/bin/Release/*.nupkg -k ${{secrets.GITHUB_TOKEN}} --skip-duplicate
