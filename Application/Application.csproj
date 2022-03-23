@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Events\Events.csproj" />
+    <ProjectReference Include="..\Events\MarketPriceBinanceCollector.Events.csproj" />
   </ItemGroup>
 
 </Project>

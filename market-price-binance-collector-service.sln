@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{324CFAA0-1A01-489D-A849-67ACE9FB343E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{324CFAA0-1A01-489D-A849-67ACE9FB343E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{AC5D8E71-9965-443B-8152-C574654196C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{AC5D8E71-9965-443B-8152-C574654196C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{AA42B628-A762-4F29-A755-30B5B55C7FB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{AA42B628-A762-4F29-A755-30B5B55C7FB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{57138418-0A3D-40AC-835A-472136192FA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{57138418-0A3D-40AC-835A-472136192FA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events", "Events\Events.csproj", "{9B6E29C0-6D82-40B9-979C-01285492B715}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketPriceBinanceCollector.Events", "Events\MarketPriceBinanceCollector.Events.csproj", "{9B6E29C0-6D82-40B9-979C-01285492B715}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

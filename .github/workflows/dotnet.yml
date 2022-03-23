@@ -11,7 +11,7 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-        app_path: ./Events/Events.csproj
+        app_path: ./MarketPriceBinanceCollector.Events/MarketPriceBinanceCollector.Events.csproj
     steps:
     - uses: actions/checkout@v2
     
