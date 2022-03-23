@@ -4,14 +4,14 @@
 	<TargetFramework>net6.0</TargetFramework>
 	<ImplicitUsings>enable</ImplicitUsings>
 	<Nullable>enable</Nullable>
-	<Version>1.0.4</Version>
+	<Version>1.0.5</Version>
 	<Authors>Igor Rebeche Rosa</Authors>
 	<Company>GitHub</Company>
 	<PackageId>MarketPriceEvents</PackageId>
 	<PackageDescription>This package adds Market Price Events!</PackageDescription>
 	<RepositoryUrl>https://github.com/IgorRebeche/market-price-binance-collector-service</RepositoryUrl>
-	<AssemblyName>Market.Price.Binance.Collector.Service</AssemblyName>
-	<RootNamespace>Market.Price.Binance.Collector.Service</RootNamespace>
+	<AssemblyName>Market.Price.Binance.Collector.Service.Events</AssemblyName>
+	<RootNamespace>Market.Price.Binance.Collector.Service.Events</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
