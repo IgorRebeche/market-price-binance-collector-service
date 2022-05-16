@@ -22,20 +22,24 @@ namespace Application.Tasks
             _binanceService = binanceService;
             _publishEndpoint = factory.CreateScope().ServiceProvider.GetRequiredService<IPublishEndpoint>();
         }
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Start Job");
             List<string> pairs = new List<string>();
             pairs.Add("btcusdt");
             pairs.Add("ethusdt");
             pairs.Add("bnbusdt");
-            Task.Run(async () =>
-            {
-                await GetBookTickerStreams(pairs);
-            });
+            
+            _ = Task.Run(async () =>
+              {
+                  GetBookTickerStreams(pairs);
+              }, cancellationToken);
 
+            _logger.LogInformation("Started Job");
 
-            return Task.CompletedTask;
+            //await Task.Delay(10000);
+
+            //await _binanceService.UnsubscribeBookTicker(pairs);
         }
 
         private async Task GetTickerStreams(List<string> pairs)
@@ -55,9 +59,9 @@ namespace Application.Tasks
             });
         }
 
-        private async Task GetBookTickerStreams(List<string> pairs)
+        private void GetBookTickerStreams(List<string> pairs)
         {
-            await _binanceService.GetBookTickerStreams(pairs, async msg =>
+            _binanceService.GetBookTickerStreams(pairs, async msg =>
             {
                 _logger.LogInformation("Message received from UseCase: {@msg}", msg);
                 await _publishEndpoint.Publish<ITickerCollected>(new
@@ -67,7 +71,9 @@ namespace Application.Tasks
                     Volume = msg.BidQuantity,
                     TimeStamp = DateTimeOffset.Now.ToUnixTimeMilliseconds(),
                     BrokerName = BINANCE_BROKER
-                }); ;
+                });
+
+                //_binanceService.Disconnect();
 
             });
         }

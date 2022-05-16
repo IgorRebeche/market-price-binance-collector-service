@@ -16,6 +16,7 @@ namespace Infrastructure.Services.BinanceService
     {
         private readonly ILogger<BinanceService> _logger;
         private ManualResetEvent exitEvent;
+        private WebsocketClient _client;
 
         public BinanceService(ILogger<BinanceService> logger)
         {
@@ -59,7 +60,28 @@ namespace Infrastructure.Services.BinanceService
         public void Disconnect()
         {
             exitEvent.Set();
+            _client.Dispose();
             _logger.LogInformation("Discconecting Binance Stream!");
+        }
+
+        public async Task SubscribeBookTicker(List<string> pairs)
+        {
+            JObject obj = new JObject();
+            obj["method"] = "SUBSCRIBE";
+            obj["params"] = JArray.FromObject(pairs.Select(pair => pair + "@bookTicker").ToArray());
+            obj["id"] = 1;
+
+            _client.Send(obj.ToString());
+        }
+
+        public async Task UnsubscribeBookTicker(List<string> pairs)
+        {
+            JObject obj = new JObject();
+            obj["method"] = "UNSUBSCRIBE";
+            obj["params"] = JArray.FromObject(pairs.Select(pair => pair + "@bookTicker").ToArray());
+            obj["id"] = 1;
+
+            _client.Send(obj.ToString());
         }
 
         private void ConnectWebSocket<T>(JObject message, Action<T> handleMessage)
@@ -68,38 +90,40 @@ namespace Infrastructure.Services.BinanceService
 
             var url = new Uri("wss://stream.binance.com:9443/ws");
 
-            using (var client = new WebsocketClient(url))
+            _client = new WebsocketClient(url);
+            _client.ReconnectTimeout = TimeSpan.FromSeconds(30);
+            _client.ReconnectionHappened.Subscribe(info =>
+            _logger.LogInformation($"Reconnection happened, type: {info.Type}"));
+
+            //var a = JsonSerializer.Deserialize<ITickerMessageResponse>(msg.Text);
+            _client.MessageReceived.Subscribe(msg =>
             {
-                client.ReconnectTimeout = TimeSpan.FromSeconds(30);
-                client.ReconnectionHappened.Subscribe(info =>
-                    _logger.LogInformation($"Reconnection happened, type: {info.Type}"));
-
-                //var a = JsonSerializer.Deserialize<ITickerMessageResponse>(msg.Text);
-                client.MessageReceived.Subscribe(msg =>
+                try
                 {
-                    try
-                    {
-                        var response = JsonSerializer.Deserialize<T>(msg.Text);
+                    var response = JsonSerializer.Deserialize<T>(msg.Text);
                        
-                        if (response is null)
-                        {
-                            _logger.LogWarning("Something went wrong, deserialization returned null for msg = {message}", msg);
-                            return;
-                        }
-
-                        handleMessage(response);
-                    } catch (Exception ex)
+                    if (response is null)
                     {
-                        _logger.LogWarning("Something went wrong, could not deserializate msg = {message}", msg);
-                        throw;
+                        _logger.LogWarning("Something went wrong, deserialization returned null for msg = {message}", msg);
+                        return;
                     }
 
-                });
-                client.Start();
-                Task.Run(() => client.Send(message.ToString()));
+                    handleMessage(response);
+                } catch (Exception ex)
+                {
+                    _logger.LogWarning("Something went wrong, could not deserializate msg = {message}", msg);
+                    throw;
+                }
 
-                exitEvent.WaitOne();
-            }
+            });
+            
+            Task.Run(() =>
+            {
+                _client.Start();
+                _client.Send(message.ToString());
+            });
+
+            exitEvent.WaitOne();
         }
 
 

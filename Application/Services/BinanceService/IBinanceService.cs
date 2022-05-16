@@ -15,6 +15,10 @@ namespace Application.Services.BinanceService
 
         public Task GetBookTickerStreams(List<string> pairs, Action<BookTickerMessageResponse> handleMessage);
 
+        public Task SubscribeBookTicker(List<string> pairs);
+
+        public Task UnsubscribeBookTicker(List<string> pairs);
+
         public void Disconnect();
     }
 }
